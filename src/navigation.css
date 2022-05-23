@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #333;
+    overflow: auto;
+}
+.navhome {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navprofile {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navhome:hover{
+    background-color: #111;
+}
+.navprofile:hover{
+    background-color: #111;
+}
+
+.navhome{
+    float:left
+}
+.navprofile{
+  float:left
+}
