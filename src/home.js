@@ -1,9 +1,11 @@
 import React from 'react';
+import friendProfile from './friendProfile';
 
 function home() {
+    
   return (
-    <div>home</div>
+    <friendProfile></friendProfile>
   )
 }
 
-export default home
+export default home;
