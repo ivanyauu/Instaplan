@@ -1,14 +1,16 @@
 import React from 'react';
 
-function Event({name, date, time, description}) {
+function Event(name, date, time, description) {
   return (
-    <div classname='event'>
-        <div classname='eventHeader'>
+        <div>
             <p>{name} {date} {time}</p>
             <p>{description}</p>
         </div>
-    </div>
   )
 }
+
+
+
+
 
 export default Event;
