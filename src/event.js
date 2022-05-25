@@ -1,16 +1,18 @@
-/*import React from 'react';
+import React from 'react';
+import './event.css';
 
 function Event(name, date, time, description) {
   return (
-        <div>
-            <p>{name} {date} {time}</p>
-            <p>{description}</p>
-        </div>
+    <div className='event'>
+      <div className='eventHeader'>
+          <p><strong>{name}</strong> — {date} @ {time}</p>  
+      </div>
+      <div className='eventDesc'>
+        <p>{description}</p>  
+      </div>
+    </div>
   )
 }
 
 
-
-
-
-export default Event;*/
+export default Event;
