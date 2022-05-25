@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 
 function Event(name, date, time, description) {
   return (
@@ -13,4 +13,4 @@ function Event(name, date, time, description) {
 
 
 
-export default Event;
+export default Event;*/
