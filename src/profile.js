@@ -74,7 +74,7 @@ class Profile extends React.Component {
     render(){
         const today = new Date();
         const month = today.getMonth() + 1; //wasn't sure how to do this addition inside h2
-        const eventsToDisplay = this.displayEvents();
+        //const eventsToDisplay = this.displayEvents();
         return (
             <>
             <div class = "headers">
@@ -84,7 +84,7 @@ class Profile extends React.Component {
 
             <div class = "test">
                 {
-                    eventsToDisplay.map(eventX => <p>{eventX[0]}  {eventX[1]} {eventX[2]} {eventX[3]}</p>)
+                    //eventsToDisplay.map(eventX => <p>{eventX[0]}  {eventX[1]} {eventX[2]} {eventX[3]}</p>)
                 }
             </div>
             </>
