@@ -1,13 +1,10 @@
 * {
     margin: 0px;
 }
-.poster {
-    padding: 10px;
-}
 
-.userEvents {
-    width: 95%;
-    position: fixed;
-    transform: translate(-50%); 
-    left: 50%;
+.home {
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
 }

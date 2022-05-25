@@ -1,20 +1,32 @@
 import React from 'react';
-import Event from './event.js';
 import './home.css'
+import { db } from './firebase.js';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import UserEvents from './userEvents.js';
 
 
-function home() {
+function Home() {
+  const [userEventss, setUserEventss] = useState([]);
+  useEffect(() => {
+    db.collection('users').onSnapshot(snapshot => {
+      setUserEventss(snapshot.docs.map(doc => ({
+        id: doc.id,
+        userEvent: doc.data()
+      })));
+    })
+  }, []);
+  
+
   return (
     <div className='home'>
-      <div className='poster'>
-        <strong><i>Michael Tao</i></strong>
-      </div>
-      <div className='userEvents'>
-      <Event name='Project Due' date='6/1/2022' time='5:00am' description='Turn in 35L project'/>
-      <Event name='Physical Therapy' date='5/24/2022' time='4:00pm' description='Go to trainer for PT'/>
-      </div>
+      {
+        userEventss.map(({id, userEvent}) => (
+          <UserEvents key={id} userID={id} name={userEvent.user} />
+        ))
+      }
     </div>
   )
 }
 
-export default home;
+export default Home;
