@@ -14,14 +14,19 @@
 .modal-content{
   width:500px;
   background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .modal-header, .modal-footer{
   padding: 10px;
 }
 
+.modal-header{
+  background-color: rgb(211, 23, 23);
+}
 .modal-title{
   margin:0;
+  font:2em bold;
 }
 
 .modal-body{
@@ -32,6 +37,15 @@
 .submit-button{
   background-color:deepskyblue;
   float: right;
+}
+
+.submit-button:hover{
+  cursor:pointer;
+  background-color: rgb(4, 168, 222);
+}
+
+.close-button:hover{
+  cursor:pointer;
 }
 
 .end-style{

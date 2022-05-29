@@ -24,5 +24,11 @@
   }
 
   .open-modal{
-    color: red;
+    background-color: rgb(177, 5, 5);
+    color: #FFFFFF;
+  }
+
+  .open-modal:hover{
+    background-color: rgb(147, 4, 4);
+    cursor: pointer;
   }
