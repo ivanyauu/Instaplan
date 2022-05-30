@@ -60,6 +60,7 @@ function App() {
 
     db.collection('users').doc(user.uid).set({
       user: user.displayName,
+      friends: [],
     });
 
     setOpen(false);
