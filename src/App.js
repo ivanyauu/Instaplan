@@ -8,6 +8,7 @@ import Home from "./home.js";
 import { auth, db } from './firebase.js';
 import { useState, useEffect} from 'react';
 import { Input, Button, Modal, Box } from '@mui/material';
+import SearchPage from './searchPage.js'
 
 const style = {
   position: 'absolute',
@@ -150,6 +151,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/searchPage" element={<SearchPage />} />
           </Routes>
         </Router>
         

@@ -6,9 +6,6 @@ import { Modal, Button, Input, Dialog, DialogActions, DialogContent, DialogTitle
 import UserEvents from './userEvents.js';
 import FriendProfile from './friendProfile';
 
-
-
-
 function SearchPage() {
 
   const [users, setUsers] = useState([]);
