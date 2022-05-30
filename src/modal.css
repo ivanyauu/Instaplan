@@ -1,0 +1,65 @@
+.modal{
+  position:fixed;
+  background-color: #888;
+  background-color: rgba(0,0,0,.5);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content{
+  width:500px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-header, .modal-footer{
+  padding: 10px;
+}
+
+.modal-header{
+  background-color: rgb(211, 23, 23);
+}
+.modal-title{
+  margin:0;
+  font:2em bold;
+}
+
+.modal-body{
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.submit-button{
+  background-color:deepskyblue;
+  float: right;
+}
+
+.submit-button:hover{
+  cursor:pointer;
+  background-color: rgb(4, 168, 222);
+}
+
+.close-button:hover{
+  cursor:pointer;
+}
+
+.end-style{
+  margin: 4.5px;
+}
+
+.get-name{
+  margin-top: 10px;
+}
+
+.get-description{
+  margin-top: 10px;
+}
+
+.get-start-time{
+  margin-top: 10px;
+}

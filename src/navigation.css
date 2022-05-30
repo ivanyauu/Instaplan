@@ -16,10 +16,22 @@
     padding: 14px 16px;
     text-decoration: none;
 }
+
+.searchPage {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
 .navhome:hover{
     background-color: #111;
 }
 .navprofile:hover{
+    background-color: #111;
+}
+.searchPage:hover{
     background-color: #111;
 }
 
@@ -27,5 +39,8 @@
     float:left
 }
 .navprofile{
+  float:left
+}
+.searchPage{
   float:left
 }

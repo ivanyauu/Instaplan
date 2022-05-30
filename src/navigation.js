@@ -16,6 +16,9 @@ function Navigation(){
                     <NavLink className="navprofile" to="/profile">
                         Profile
                     </NavLink>
+                    <NavLink className="searchPage" to="/searchPage">
+                        Search
+                    </NavLink>
                 </div>
             </nav>
         </div>
