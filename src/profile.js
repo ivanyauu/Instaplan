@@ -1,19 +1,98 @@
 import Event from './event.js'
-import React, { Component } from 'react';
+import { db } from './firebase.js';
+import { useState, useEffect} from 'react';
+import DatesEvents from './datesEvents.js';
 
-class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            eventsList: [],
-            displayDate: [],
-            todaysDate: []
-        };
+
+
+
+function Profile ({username, passedDate}) {
+    const [eventsList, updateEventsList] = useState([]);
+    const [datesList, updateDatesList] = useState([]);
+    const [displayDate, updateDisplayDate] = useState([]);
+    const [todaysDate, updateTodaysDate] = useState([]);
+    
+
+    useEffect(() => {
+        const today = new Date();
+        updateDisplayDate({month: today.getMonth() + 1, day: today.getDate(), year: today.getFullYear()});
+        updateTodaysDate({month: today.getMonth() + 1, day: today.getDate(), year: today.getFullYear()});
+
+        
+    }, [])
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+        loadIntoDateList(getUserID());
+    }, 100);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+    }, [])
+
+
+    function getUserID () {
+        return "22zbt4skLZzQMnOzmqWA";
+    }
+
+    function loadIntoDateList (userID) {
+        db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
+            updateDatesList(snapshot.docs.map(doc => ({
+              id: doc.id,
+              event: doc.data(),
+            })));
+        })
+    }
+    
+    function getDateID (date) {
+        for (let i = 0; i < datesList.length; i++) {
+            if (datesList[i].event.date === date) {
+                return datesList[i].id;
+            }
+        }
+    }
+
+    
+
+    function dateAsString (date) {
+        return date.month + "/" + date.day + "/" + date.year;
+    }
+
+    function dummyFetch() {
+        getDateID(dateAsString(displayDate));
     }
 
 
+    return(
+        <>
 
 
+            <div class = "headers">
+                    
+
+
+                    <h1>{"Displaying Plans for " + dateAsString(displayDate)} </h1>
+                    <h2>{"Today's Date is " +  dateAsString(todaysDate)}</h2>
+         
+                    {dummyFetch()}
+
+                    <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))} date = {dateAsString(displayDate)}></DatesEvents>
+
+                    {/*<button onClick={() => {loadIntoDateList(getUserID())}}></button>*/}
+            </div>
+
+        </>
+        
+
+    )
+
+
+
+
+
+}
+
+export default Profile;
+/*
      addStates() {
         const allDays = this.getData();
         const daysAndEvents = allDays.map(dayX => {
@@ -50,12 +129,22 @@ class Profile extends React.Component {
         return [day1, day2, day3];
     }
 
-    componentDidMount () {
-        const today = new Date();
-        this.setState({displayDate: {month: today.getMonth() + 1, day: today.getDate(), year: today.getFullYear()}});
-        this.addStates();
+    
+
+    
+    whoAmI () {
+        return "22zbt4skLZzQMnOzmqWA";
     }
 
+     dateTodateID (userID) {
+        this.state.eventsList = db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
+          snapshot.docs.map(doc => ({
+            id: doc.id,
+            event: doc.data()
+          }));
+        })
+        console.log(this.s)
+     }
 
     displayEvents () {
         if (this.state.eventsList.length > 0) {
@@ -74,6 +163,10 @@ class Profile extends React.Component {
     render(){
         const today = new Date();
         const month = today.getMonth() + 1; //wasn't sure how to do this addition inside h2
+        const myID = this.whoAmI();
+
+
+
         //const eventsToDisplay = this.displayEvents();
         return (
             <>
@@ -81,10 +174,10 @@ class Profile extends React.Component {
                 <h1>{"Displaying Plans for " + this.state.displayDate.month + "/" + this.state.displayDate.day + "/" + this.state.displayDate.year} </h1>
                 <h2>{"Today's Date is " +  month + "/" + today.getDate() + "/" + today.getFullYear()}</h2>
             </div>
-
-            <div class = "test">
+            
+            <div class = "events">
                 {
-                    //eventsToDisplay.map(eventX => <p>{eventX[0]}  {eventX[1]} {eventX[2]} {eventX[3]}</p>)
+                    //<DatesEvents userID ={this.whoAmI() dateID = }></DatesEvents>
                 }
             </div>
             </>
