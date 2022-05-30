@@ -14,7 +14,7 @@ function UserEvents({userID, name}) {
             datesEvent: doc.data()
           })));
         })
-      }, []);
+      });
 
   return (
     <div className='userEvents'>

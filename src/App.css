@@ -1,0 +1,28 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    align-items: center;
+}
+.app_loginContainer{
+    display: flex;
+    padding-right: 10px;
+}
+
+.signIn:hover {
+    background-color: #111;
+}
+.signUp:hover {
+    background-color: #111;
+}
+
+.signIn > Button{
+    color: white;
+}
+.signUp > Button{
+    color: white;
+}
+
+.logOut > Button {
+    color: white;
+}

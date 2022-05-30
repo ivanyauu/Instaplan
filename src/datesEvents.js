@@ -15,7 +15,7 @@ function DatesEvents({userID, dateID, date}) {
             event: doc.data()
           })));
         })
-      }, []);
+      });
 
 
   return (
