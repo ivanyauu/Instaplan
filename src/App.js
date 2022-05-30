@@ -35,7 +35,6 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.log(authUser);
         setUser(authUser);
       } else {
         setUser(null);
@@ -58,10 +57,11 @@ function App() {
       alert(error.message + ' Please try again.')
     });
 
-    db.collection('users').doc(user.uid).set({
-      user: user.displayName,
+    db.collection('users').add({
+      user: username,
     });
 
+    console.log(username);
     setOpen(false);
   }
 
