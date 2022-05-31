@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import './modal.css'
+import './modal.css';
+import { db } from './firebase.js';
+
+
 
 
 const Modal = props => {
-
-  const[eventMonth, setEventMonth]=useState(null)
-  const[eventDay, setEventDay]=useState(null)
-  const[eventYear, setEventYear]=useState(null)
+  const userID= '22zbt4skLZzQMnOzmqWA';
+  const dateID= '7IXHigJETTj4kVfru152'
+  const[eventMonth, setEventMonth]=useState('January')
+  const[eventDay, setEventDay]=useState('1')
+  const[eventYear, setEventYear]=useState('2022')
   const[eventName, setEventName]=useState(null)
   const[eventDescription, setEventDescription]=useState(null)
   const[startHour, setStartHour]=useState('')
   const[startMinute, setStartMinute]=useState('')
-  const[startAMPM, setStartAMPM]=useState(null)
+  const[startAMPM, setStartAMPM]=useState('AM')
   const[endHour, setEndHour]=useState('')
   const[endMinute, setEndMinute]=useState('')
-  const[endAMPM, setEndAMPM]=useState(null)
+  const[endAMPM, setEndAMPM]=useState('AM')
   const[makePublic, setMakePublic]=useState(null)
 
   if(!props.show){
@@ -49,7 +53,7 @@ const Modal = props => {
   };
 
   const startMinuteCheck = (e) => {
-    const re2 = new RegExp('^([1-5]|[1-5][0-9])$')
+    const re2 = new RegExp('^([0-5]|[0-5][0-9])$')
       if (e.target.value === '' || re2.test(e.target.value)) {
         setStartMinute(e.target.value);
       }
@@ -61,28 +65,16 @@ const Modal = props => {
       }
   };
   const endMinuteCheck = (e) => {
-    const re4 = new RegExp('^([1-5]|[1-5][0-9])$')
+    const re4 = new RegExp('^([0-5]|[0-5][0-9])$')
       if (e.target.value === '' || re4.test(e.target.value)) {
         setEndMinute(e.target.value);
       }
   };
 
-
-  function updateStartMinute(val) {
-    setStartMinute(val.target.value)
-  }
-
   function updateStartAMPM(val) {
     setStartAMPM(val.target.value)
   }
 
-  function updateEndHour(val) {
-    setEndHour(val.target.value)
-  }
-
-  function updateEndMinute(val) {
-    setEndMinute(val.target.value)
-  }
 
   function updateEndAMPM(val) {
     setEndAMPM(val.target.value)
@@ -109,7 +101,7 @@ const Modal = props => {
   }
 
     function monthToNumber(eventMonth){
-        const months=["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const nums=[1,2,3,4,5,6,7,8,9,10,11,12];
         for(let i=0; i<months.length; i++){
           if(months[i] === eventMonth){
@@ -118,15 +110,34 @@ const Modal = props => {
         }
     }
 
-    /*await setDoc(db.collection('users').doc(userID), "dates", "3"),{
-      date: monthToNumber() + "/" + eventDay + "/" + eventYear,
+    async function addDate(){
 
-    } */ 
-  
+      db.collection('users').doc(userID).collection('dates').add({
+        date: monthToNumber(eventMonth) + "/" + eventDay + "/" + eventYear,
+        });
+      }  
+
+    async function addEvent(){
+
+      db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
+        name: eventName,
+        description: eventDescription,
+        startTime: startHour + ":" + startMinute + startAMPM,
+        endTime: endHour + ":" + endMinute + endAMPM
+
+      });
+    }
+      
+    /*function resetVariables(){
+      document.getElementsByName('input-form').reset();
+    }*/
 
   function submitEvent(){
     onSubmit();
+    addDate();
+    addEvent();
     props.onClose();
+    /*resetVariables();*/
   }
   
   return(
@@ -137,9 +148,9 @@ const Modal = props => {
           <h4 className="modal-title">{props.title}</h4>
         </div>
         <div className="modal-body">
-          <form onSubmit={submitEvent}>
+          <form id="input-form" onSubmit={submitEvent}>
             <span className="get-date">
-              <select name="input-month" id="input-month" onChange={updateEventMonth} required>
+              <select defaultValue="January" name="input-month" id="input-month" onChange={updateEventMonth} required>
                     <optgroup label="Months">
                         <option month="1">January</option>
                         <option month="2">February</option>
@@ -155,7 +166,7 @@ const Modal = props => {
                         <option month="12">December</option>
                     </optgroup> 
                 </select>
-                <select name="input-day" id="input-day" onChange={updateEventDay} required>
+                <select defaultValue="1" name="input-day" id="input-day" onChange={updateEventDay} required>
                     <optgroup label="Day">
                         <option day="1">1</option>
                         <option day="2">2</option>
