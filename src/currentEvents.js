@@ -5,22 +5,21 @@ import { useState, useEffect} from 'react';
 import DatesEvents from './datesEvents';
 
 
-function UserEvents({userID, name}) {
+function CurrentEvents({userID, name}) {
     const [dateEvents, setDateEvents] = useState([]);
-    // let today = new Date();
-    // let yyyy = today.getFullYear();
-    // let mm = today.getMonth() + 1; // Months start at 0!
-    // let dd = today.getDate();
 
-    // // if (dd < 10) dd = '0' + dd;
-    // // if (mm < 10) mm = '0' + mm;
-    // // Depends on if we want our date to be 5/5/2022 or 05/05/2022
+    let today = new Date();
+    let yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1; // Months start at 0!
+    let dd = today.getDate();
 
-    // today = mm + '/' + dd + '/' + yyyy;
-    // This really depends on how we implement our dates
+    if (dd < 10) dd = dd;
+    if (mm < 10) mm = mm;
 
+    today = mm + '/' + dd + '/' + yyyy;
+    
     useEffect(() => {
-        db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
+        db.collection('users').doc(userID).collection('dates').where('date', '==', today).onSnapshot(snapshot => {
           setDateEvents(snapshot.docs.map(doc => ({
             id: doc.id,
             datesEvent: doc.data()
@@ -42,4 +41,4 @@ function UserEvents({userID, name}) {
   )
 }
 
-export default UserEvents;
+export default CurrentEvents;

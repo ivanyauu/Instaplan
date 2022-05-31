@@ -3,7 +3,7 @@ import './home.css'
 import { db } from './firebase.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import UserEvents from './userEvents.js';
+import CurrentEvents from './currentEvents.js';
 
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
     <div className='home'>
       {
         userEventss.map(({id, userEvent}) => (
-          <UserEvents key={id} userID={id} name={userEvent.user} />
+          <CurrentEvents key={id} userID={id} name={userEvent.user} />
         ))
       }
     </div>

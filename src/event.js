@@ -21,7 +21,7 @@ function Event({userID, dateID, eventID, name, date, time, description}) {
 
     setComment("");
     
-}
+  }
   useEffect(() => {
       db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('comments').orderBy('timestamp', 'asc').onSnapshot((snapshot) => {
           setComments(snapshot.docs.map((doc) => ({
@@ -31,7 +31,7 @@ function Event({userID, dateID, eventID, name, date, time, description}) {
       });
 
 
-}, []);
+  }, []);
 
   
 
