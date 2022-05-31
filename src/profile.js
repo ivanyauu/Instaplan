@@ -6,7 +6,7 @@ function Profile() {
     const [show, setShow] = useState(false)
     return(
         <div className="profile">
-
+            
 
             <select name="input-month" id="input-month" required>
                 <optgroup label="Months">
