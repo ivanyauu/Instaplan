@@ -168,7 +168,7 @@ function Profile ({username, passedDate}) {
                         <button className='open-modal' onClick={() => setShow(true)}>
                             Add Event
                         </button>
-                        <Modal title="New Event" onClose={() => setShow(false)} show={show}></Modal>
+                        <Modal dl={datesList} title="New Event" onClose={() => setShow(false)} show={show}></Modal>
                     </div>
 
                     <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))}></DatesEvents>
