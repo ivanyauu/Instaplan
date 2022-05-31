@@ -1,13 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import "./searchPage.css"
-import { db } from './firebase.js';
+import { db, auth } from './firebase.js';
 import { Modal, Button, Input, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import UserEvents from './userEvents.js';
 import Follow from './follow.js';
 
+
 function FriendProfile({id, user}) {
   const [open, setOpen] = useState(false);
+
 
   return (
     <div className='profButton'>
