@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './modal.css';
 import { db } from './firebase.js';
 
 
 
 
+
+
 const Modal = props => {
   const userID= '22zbt4skLZzQMnOzmqWA';
-  const dateID= '7IXHigJETTj4kVfru152'
+  const [datesList, updateDatesList] = useState([]);
   const[eventMonth, setEventMonth]=useState('January')
   const[eventDay, setEventDay]=useState('1')
   const[eventYear, setEventYear]=useState('2022')
@@ -21,6 +23,31 @@ const Modal = props => {
   const[endAMPM, setEndAMPM]=useState('AM')
   const[makePublic, setMakePublic]=useState(null)
 
+function getDateID(date) {
+  for (let i = 0; i < datesList.length; i++) {
+      if (datesList[i].event.date === date) {
+          return datesList[i].id;
+      }
+  }
+  return false;
+}
+
+function loadIntoDateList (userID) {
+  db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
+      updateDatesList(snapshot.docs.map(doc => ({
+        id: doc.id,
+        event: doc.data(),
+      })));
+  })
+}
+
+useEffect(() => {
+  const interval = setInterval(() => {
+      loadIntoDateList(userID);
+  }, 100);
+
+  return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, [])
   if(!props.show){
     return null
   }
@@ -110,16 +137,23 @@ const Modal = props => {
         }
     }
 
-    async function addDate(){
+    function createDate(){
+      return monthToNumber(eventMonth) + "/" + eventDay + "/" + eventYear;
+    }
 
-      db.collection('users').doc(userID).collection('dates').add({
-        date: monthToNumber(eventMonth) + "/" + eventDay + "/" + eventYear,
+    async function addDate(){
+      if(getDateID(createDate())==false){
+        db.collection('users').doc(userID).collection('dates').add({
+          date: createDate()
         });
-      }  
+      }
+    }  
 
     async function addEvent(){
 
-      db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
+      while(getDateID(createDate())==false){
+      }
+      db.collection('users').doc(userID).collection('dates').doc(getDateID(createDate())).collection('myEvents').add({
         name: eventName,
         description: eventDescription,
         startTime: startHour + ":" + startMinute + startAMPM,
@@ -141,6 +175,7 @@ const Modal = props => {
   }
   
   return(
+    
     <div className="modal" onClick={props.onClose}>
     
       <div className="modal-content" onClick={e => e.stopPropagation()}>
