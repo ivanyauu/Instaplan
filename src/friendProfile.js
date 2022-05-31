@@ -9,25 +9,6 @@ import UserEvents from './userEvents.js';
 function FriendProfile({id, user}) {
   const [open, setOpen] = useState(false);
 
-  const onFollow = () => {
-    db
-    .collection("following")
-    .doc(auth.currentUser.uid)
-    .collection("userFollowing")
-    .doc(id)
-    .set({})
-  }
-
-  const onUnFollow = () => {
-    db
-    .collection("following")
-    .doc(auth.currentUser.uid)
-    .collection("userFollowing")
-    .doc(id)
-    .delete()
-  }
-
-
 
   return (
     <>
@@ -39,9 +20,6 @@ function FriendProfile({id, user}) {
         <DialogContent>
               <UserEvents key={id} userID={id} name={user} />
         </DialogContent>
-        <DialogActions>
-            <Button onClick={() => onFollow()}>Follow</Button>
-        </DialogActions>
     </Dialog>
     </>
   )
