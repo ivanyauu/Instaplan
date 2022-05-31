@@ -1,16 +1,18 @@
 import Event from './event.js'
 import { db } from './firebase.js';
-import { useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import DatesEvents from './datesEvents.js';
+import './profile.css';
+import Modal from './modal.js'
 
 
 
 
 function Profile ({username, passedDate}) {
-    const [eventsList, updateEventsList] = useState([]);
     const [datesList, updateDatesList] = useState([]);
     const [displayDate, updateDisplayDate] = useState([]);
     const [todaysDate, updateTodaysDate] = useState([]);
+    const [show, setShow] = useState(false);
     
 
     useEffect(() => {
@@ -57,145 +59,126 @@ function Profile ({username, passedDate}) {
         return date.month + "/" + date.day + "/" + date.year;
     }
 
-    function dummyFetch() {
-        getDateID(dateAsString(displayDate));
+    function updateDisplayMonthSelect(val) {
+        updateDisplayDate({month: monthToNumber(val.target.value), day: displayDate.day, year: displayDate.year});
+    }
+    function updateDisplayDaySelect(val) {
+        updateDisplayDate({month: displayDate.month, day: val.target.value, year: displayDate.year});
+    }
+    function updateDisplayYearSelect(val) {
+        updateDisplayDate({month: displayDate.month, day: displayDate.day, year: val.target.value});
+    }
+    function numberToMonth(number){
+        const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        for(let i=1; i<13; i++){
+            if(i === number){
+                return months[i - 1];
+            }
+        }
+    }
+    function monthToNumber(eventMonth){
+        const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const nums=[1,2,3,4,5,6,7,8,9,10,11,12];
+        for(let i=0; i<months.length; i++){
+          if(months[i] === eventMonth){
+            return nums[i];
+          }
+        }
     }
 
 
+    
     return(
         <>
+            
 
-
-            <div class = "headers">
+            <div className = "headers">
                     
 
+                    <h1>{"Today's Date is " +  dateAsString(todaysDate)}</h1>
+                    <h2>{"Displaying Plans for"} </h2>
+                    <div className = "Select Display Date">
+                        <select value={numberToMonth(displayDate.month)} name="input-month" id="input-month" onChange={updateDisplayMonthSelect} required>
+                            <optgroup label="Months">
+                                <option month="1">January</option>
+                                <option month="2">February</option>
+                                <option month="3">March</option>
+                                <option month="4">April</option>
+                                <option month="5">May</option>
+                                <option month="6">June</option>
+                                <option month="7">July</option>
+                                <option month="8">August</option>
+                                <option month="9">September</option>
+                                <option month="10">October</option>
+                                <option month="11">November</option>
+                                <option month="12">December</option>
+                            </optgroup> 
+                        </select>
 
-                    <h1>{"Displaying Plans for " + dateAsString(displayDate)} </h1>
-                    <h2>{"Today's Date is " +  dateAsString(todaysDate)}</h2>
-         
-                    {dummyFetch()}
+                        <select value={displayDate.day} name="input-day" id="input-day" onChange={updateDisplayDaySelect} required>
+                            <optgroup label="Day">
+                                <option day="1">1</option>
+                                <option day="2">2</option>
+                                <option day="3">3</option>
+                                <option day="4">4</option>
+                                <option day="5">5</option>
+                                <option day="6">6</option>
+                                <option day="7">7</option>
+                                <option day="8">8</option>
+                                <option day="9">9</option>
+                                <option day="10">10</option>
+                                <option day="11">11</option>
+                                <option day="12">12</option>
+                                <option day="13">13</option>
+                                <option day="14">14</option>
+                                <option day="15">15</option>
+                                <option day="16">16</option>
+                                <option day="17">17</option>
+                                <option day="18">18</option>
+                                <option day="19">19</option>
+                                <option day="20">20</option>
+                                <option day="21">21</option>
+                                <option day="22">22</option>
+                                <option day="23">23</option>
+                                <option day="24">24</option>
+                                <option day="25">25</option>
+                                <option day="26">26</option>
+                                <option day="27">27</option>
+                                <option day="28">28</option>
+                                <option day="29">29</option>
+                                <option day="30">30</option>
+                                <option day="31">31</option>
+                            </optgroup> 
+                        </select>
 
-                    <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))} date = {dateAsString(displayDate)}></DatesEvents>
+                        <select value={displayDate.year} name="input-year" id="input-year" onChange={updateDisplayYearSelect} required>
+                            <optgroup label="Year">
+                                <option year="2022">2022</option>
+                                <option year="2023">2023</option>
+                                <option year="2024">2024</option>
+                                <option year="2025">2025</option>
+                                <option year="2026">2026</option>
+                            </optgroup> 
+                        </select>
+
+                    </div>
+
+
+                    <div className='event-maker'>
+                        <button className='open-modal' onClick={() => setShow(true)}>
+                            Add Event
+                        </button>
+                        <Modal title="New Event" onClose={() => setShow(false)} show={show}></Modal>
+                    </div>
+
+                    <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))}></DatesEvents>
 
                     {/*<button onClick={() => {loadIntoDateList(getUserID())}}></button>*/}
             </div>
 
-        </>
-        
-
-    )
-
-
-
-
-
-}
-
-export default Profile;
-/*
-     addStates() {
-        const allDays = this.getData();
-        const daysAndEvents = allDays.map(dayX => {
-            const date = JSON.parse(dayX[0]);
-            const events = dayX[1].map(eventX => JSON.parse(eventX));
-            date.allEvents = events;
-            return date;
-
-        })
-        this.setState({eventsList: daysAndEvents});
-        
-    }
-
-
-    getData() {
-        const jsonString1 = '{"ID":1, "name":"frisbee", "time": "8:30", "public":"True"}';
-        const jsonString2 = '{"ID":2, "name":"soccer", "time": "7:00", "public":"False"}';
-        const jsonString3 = '{"ID":3, "name":"football", "time": "4:30", "public":"True"}';
-        const jsonString4 = '{"ID":4, "name":"futbol", "time": "7:00", "public":"False"}';
-        const jsonString5 = '{"ID":5, "name":"tennis", "time": "3:30", "public":"True"}';
-        const jsonString6 = '{"ID":6, "name":"bball", "time": "1:00", "public":"False"}';
-        const jsonString7 = '{"ID":7, "name":"baseball", "time": "9:30", "public":"True"}';
-        const jsonString8 = '{"ID":8, "name":"softball", "time": "2:00", "public":"False"}';
-
-        const jsonDay1 = '{"month":5, "day":23, "year":2022}';
-        const jsonDay2 = '{"month":5, "day":24, "year":2022}';
-        const jsonDay3 = '{"month":5, "day":25, "year":2022}';
-
-
-        const day1 = [jsonDay1, [jsonString1, jsonString2, jsonString3]];
-        const day2 = [jsonDay2, [jsonString4, jsonString5, jsonString6]];
-        const day3 = [jsonDay3, [jsonString7, jsonString8]]
-
-        return [day1, day2, day3];
-    }
-
-    
-
-    
-    whoAmI () {
-        return "22zbt4skLZzQMnOzmqWA";
-    }
-
-     dateTodateID (userID) {
-        this.state.eventsList = db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
-          snapshot.docs.map(doc => ({
-            id: doc.id,
-            event: doc.data()
-          }));
-        })
-        console.log(this.s)
-     }
-
-    displayEvents () {
-        if (this.state.eventsList.length > 0) {
-            const todaysEvents = this.state.eventsList.map(dateX => {
-                if (dateX.month === this.state.displayDate.month && dateX.day === this.state.displayDate.day 
-                    && dateX.year === this.state.displayDate.year) {
-                    return (
-                        [dateX.allEvents.ID, dateX.allEvents.time, dateX.allEvents.name, dateX.allEvents.public]
-                    );
-                }
-            })
-            return todaysEvents;
-        }
-    }
-
-    render(){
-        const today = new Date();
-        const month = today.getMonth() + 1; //wasn't sure how to do this addition inside h2
-        const myID = this.whoAmI();
-
-
-
-        //const eventsToDisplay = this.displayEvents();
-        return (
-            <>
-            <div class = "headers">
-                <h1>{"Displaying Plans for " + this.state.displayDate.month + "/" + this.state.displayDate.day + "/" + this.state.displayDate.year} </h1>
-                <h2>{"Today's Date is " +  month + "/" + today.getDate() + "/" + today.getFullYear()}</h2>
-            </div>
             
-            <div class = "events">
-                {
-                    //<DatesEvents userID ={this.whoAmI() dateID = }></DatesEvents>
-                }
-            </div>
-            </>
-        );
-    }
-
-    
+        </>
+    )
 }
 
 export default Profile;
-
-
-/*this.state.eventsList.map((eventX) => {
-                    if (eventX.ID !== 1) {
-                        return (
-                            <div>
-                                <p>{eventX.ID} {eventX.time} {eventX.name} {eventX.date}</p>
-                            </div>
-                        );
-                    }
-                })*/
