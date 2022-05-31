@@ -14,6 +14,8 @@ function DatesEvents({userID, dateID, date}) {
             id: doc.id,
             event: doc.data()
           })));
+          //console.log("yay");
+          //console.log(events);
         })
       });
 
@@ -25,7 +27,7 @@ function DatesEvents({userID, dateID, date}) {
         events.map(({id, event}) => (
           <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={event.date} time={event.time} description={event.description}/>
         ))
-      }
+        }
     </div>
   )
 }

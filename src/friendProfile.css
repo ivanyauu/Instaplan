@@ -1,0 +1,7 @@
+.profButton{
+    color: black;
+}
+
+.profButton > button{
+    text-emphasis-color: black;
+}
