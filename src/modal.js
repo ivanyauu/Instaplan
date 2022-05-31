@@ -104,8 +104,25 @@ const Modal = props => {
     console.log(endHour)
     console.log(endMinute)
     console.log(endAMPM)
-    console.log(makePublic) 
+    console.log(makePublic)
+    
   }
+
+    function monthToNumber(eventMonth){
+        const months=["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const nums=[1,2,3,4,5,6,7,8,9,10,11,12];
+        for(let i=0; i<months.length; i++){
+          if(months[i] === eventMonth){
+            return nums[i];
+          }
+        }
+    }
+
+    /*await setDoc(db.collection('users').doc(userID), "dates", "3"),{
+      date: monthToNumber() + "/" + eventDay + "/" + eventYear,
+
+    } */ 
+  
 
   function submitEvent(){
     onSubmit();
