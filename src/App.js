@@ -10,6 +10,7 @@ import { useState, useEffect} from 'react';
 import { Input, Button, Modal, Box } from '@mui/material';
 import SearchPage from './searchPage.js'
 
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -31,11 +32,14 @@ function App() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useState(null);
+  const [userid, setUserid] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
+        // console.log(authUser);
         setUser(authUser);
+        //setUserid(authUser.uid);
       } else {
         setUser(null);
       }
@@ -57,12 +61,21 @@ function App() {
       alert(error.message + ' Please try again.')
     });
 
-    db.collection('users').add({
+    // db.collection('users').add({
+    //   user: username,
+    // });
+    db.collection('users').doc(auth.currentUser.uid).set({
       user: username,
     });
 
-    console.log(username);
     setOpen(false);
+  }
+  const addtodb = (event) => {
+    event.preventDefault();
+    db.collection('users').doc(user.uid).set({
+      user: username,
+    });
+    
   }
 
   const signIn = (event) => {

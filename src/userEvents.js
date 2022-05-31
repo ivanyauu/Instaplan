@@ -18,9 +18,9 @@ function UserEvents({userID, name}) {
 
   return (
     <div className='userEvents'>
-      <div className='username'>
+      {/* <div className='username'>
         <p><strong><i>{name}</i></strong></p>
-      </div>
+      </div> */}
       {
         dateEvents.map(({id, datesEvent}) => (
           <DatesEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />

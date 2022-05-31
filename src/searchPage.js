@@ -32,7 +32,7 @@ function SearchPage() {
   }, [search, users]);
 
   return (
-    <>
+    <div className='search'>
       <div>
         <Input
           type="text"
@@ -48,7 +48,7 @@ function SearchPage() {
 
         ])}
       </div>
-    </>
+    </div>
   );
 }
 export default SearchPage;
