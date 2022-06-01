@@ -48,7 +48,6 @@ function App() {
       unsubscribe();
     }
   }, [user, username]);
-  console.log(user);
 
   const signUp = (event) => {
     event.preventDefault();
