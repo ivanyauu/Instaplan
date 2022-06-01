@@ -180,16 +180,17 @@ useEffect(() => {
 
     async function addEvent(dateID){
 
-      const test = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
+      db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
         name: eventName,
         description: eventDescription,
         startTime: startHour + ":" + startMinute + startAMPM,
         endTime: endHour + ":" + endMinute + endAMPM,
         publicEvent: makePublic,
-        //docRef: test.id
-      }).then((docRef) => {
+        myID: ""
+      });/*.then((docRef) => { //code to have each event store it's ID
+        db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(docRef.id).update({myID: docRef.id});
         console.log('Added document with ID: ', docRef.id);
-      });
+      })*/
     }
       
     function resetVariables(){

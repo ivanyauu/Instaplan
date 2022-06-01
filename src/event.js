@@ -42,6 +42,23 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
     }
   }
 
+  function deleteEventButton () {
+    if (profileBool) {
+      return (
+        <button className="deleteEvent" onClick={deleteEvent}>
+          Delete This Event
+        </button> 
+      )
+    }
+  }
+  
+  function deleteEvent () {
+
+    console.log(eventID)
+    db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).delete();
+    
+  }
+
 
 
 
@@ -59,6 +76,10 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
 
       <div className='public'>
         {displayPublic()}
+      </div>
+
+      <div>
+        {deleteEventButton()}
       </div>
 
   
