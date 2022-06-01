@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { db, auth } from './firebase';
 import firebase from "firebase/compat/app";
+import { display } from '@mui/system';
 
 
-function Event({userID, dateID, eventID, name, date, time, description}) {
+function Event({userID, dateID, eventID, name, date, startTime, endTime, description, publicEvent, profileBool}) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
 
@@ -21,7 +22,7 @@ function Event({userID, dateID, eventID, name, date, time, description}) {
 
     setComment("");
     
-}
+    }
   useEffect(() => {
       db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('comments').orderBy('timestamp', 'asc').onSnapshot((snapshot) => {
           setComments(snapshot.docs.map((doc) => ({
@@ -31,18 +32,34 @@ function Event({userID, dateID, eventID, name, date, time, description}) {
       });
 
 
-}, []);
+  }, []);
+
+  function displayPublic () {
+    console.log(profileBool + " " + publicEvent)
+    if (profileBool && publicEvent) {
+      return (<p>This event is public</p>)
+    }
+  }
+
+
+
 
   
 
   return (
     <div className='event'>
       <div className='eventHeader'>
-          <p><strong><i>{name}</i></strong> @ {time}</p>  
+          <p><strong><i>{name}</i></strong> {startTime} to {endTime}</p>  
       </div>
       <div className='eventDesc'>
-        <p>{description}</p>  
+        <p>Description: {description}</p>  
       </div>
+
+      <div className='public'>
+        {displayPublic()}
+      </div>
+
+  
 
       <div>
           {comments.map(({id, comment})=> (
