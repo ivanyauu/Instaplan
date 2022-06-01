@@ -5,6 +5,7 @@ import FriendProfile from './friendProfile.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './homeEvents.css'
+import CurrentEvents from './currentEvents.js';
 
 function HomeEvents({userID}) {
     const [userEventss, setUserEventss] = useState([]);
@@ -24,9 +25,8 @@ function HomeEvents({userID}) {
       <div className='homeEvents'>
         {
           userEventss.map(({id, userEvent}) => (
-            <div>
-                <FriendProfile id={id} user={userEvent.user} />
-                <UserEvents id={id} key={id} userID={id} name={userEvent.user} />
+            <div className='userEvents'>
+                <CurrentEvents id={id} key={id} userID={id} name={userEvent.user} />
             </div>
           ))
         }

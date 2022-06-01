@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { db, auth } from './firebase';
 import firebase from "firebase/compat/app";
 import { display } from '@mui/system';
+import { Card } from '@mui/material';
+import Comments from './comments';
 
 
 function Event({userID, dateID, eventID, name, date, startTime, endTime, description, publicEvent, profileBool}) {
@@ -47,10 +49,11 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
   
 
   return (
-    <div className='event'>
+    <Card className='event' style={{backgroundColor: "#f5f5f5"}}>
       <div className='eventHeader'>
           <p><strong><i>{name}</i></strong> {startTime} to {endTime}</p>  
       </div>
+
       <div className='eventDesc'>
         <p>Description: {description}</p>  
       </div>
@@ -87,8 +90,9 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
               <strong>Post</strong>
           </button>
         </form>
-    
-    </div>
+
+      <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
+    </Card>
   )
 }
 

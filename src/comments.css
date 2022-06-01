@@ -1,0 +1,38 @@
+.event {
+    padding-left: 5%;
+    padding-right: 10%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.eventHeader {
+    margin: 0;
+    padding: 0;
+}
+
+.eventDesc {
+    padding-bottom: 3%;
+}
+
+.post_commentbox{
+    display: flex;
+}
+
+.post_input{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid lightgrey;
+}
+
+.post_button {
+    flex: 0;
+    border: none;
+    border-top: 1px solid lightgrey;
+}
+
+.post_comments {
+    padding: 10px 20px;
+}

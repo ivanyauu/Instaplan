@@ -1,7 +1,12 @@
 .profButton{
-    color: black;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.profButton > button{
-    text-emphasis-color: black;
+.profButton:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }

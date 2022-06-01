@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import "./searchPage.css"
 import { db } from './firebase.js';
-import { Modal, Button, Input, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
+import { Card } from '@mui/material';
 import UserEvents from './userEvents.js';
 import FriendProfile from './friendProfile';
 
@@ -33,21 +33,16 @@ function SearchPage() {
 
   return (
     <div className='search'>
-      <div>
-        <Input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div>
-        {filteredUsers.map((account) => [
-          <div key={account.id}>
-          <FriendProfile id = {account.id} user = {account.user}/>
+    <div className="wrapper">
+           <div className="searchBar">
+                <input onChange={(e) => setSearch(e.target.value)} id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search"  />
           </div>
-
+    </div>
+        {filteredUsers.map((account) => [
+          <Card key={account.id} className = "user" style={{backgroundColor: "#f5f5f5"}}>
+          <FriendProfile id = {account.id} user = {account.user}/>
+          </Card>
         ])}
-      </div>
     </div>
   );
 }

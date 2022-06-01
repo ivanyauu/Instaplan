@@ -1,10 +1,10 @@
 .event {
-    border: 1px solid black;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-left: 5%;
+    padding-right: 10%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 .eventHeader {
@@ -13,6 +13,6 @@
 }
 
 .eventDesc {
-    padding-left: 25px;
+    padding-bottom: 3%;
 }
 
