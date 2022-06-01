@@ -6,6 +6,7 @@ import { Modal, Button, Input, Dialog, DialogActions, DialogContent, DialogTitle
 import UserEvents from './userEvents.js';
 import Follow from './follow.js';
 import "./friendProfile.css"
+import SearchProfileEvents from './searchProfileEvents';
 
 
 function FriendProfile({id, user}) {
@@ -25,8 +26,7 @@ function FriendProfile({id, user}) {
         <Follow followUser={id}/>
         </DialogTitle>
           <DialogContent>
-                
-                <UserEvents key={id} userID={id} name={user} />
+                <SearchProfileEvents key={id} userID={id} name={user} />
           </DialogContent>
       </Dialog>
     </div>
