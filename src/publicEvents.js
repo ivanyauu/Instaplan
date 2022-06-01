@@ -9,7 +9,7 @@ import './publicEvents.css'
 function PublicEvents({userID, dateID, date}) {
     const [events, setEvents] = useState([]);
     useEffect(() => {
-        db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').where("public", "==", true).onSnapshot(snapshot => {
+        db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').where("publicEvent", "==", true).onSnapshot(snapshot => {
           setEvents(snapshot.docs.map(doc => ({
             id: doc.id,
             event: doc.data()

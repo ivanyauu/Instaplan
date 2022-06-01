@@ -2,7 +2,6 @@ import React from 'react';
 import './currentEvents.css';
 import { db } from './firebase.js';
 import { useState, useEffect} from 'react';
-import DatesEvents from './datesEvents';
 import PublicEvents from './publicEvents';
 import FriendProfile from './friendProfile';
 
@@ -32,7 +31,7 @@ function CurrentEvents({userID, name}) {
   return (
     <div className='userEvents'>
       <div className='username'>
-        <FriendProfile id = {userID} user ={name}/>
+        <FriendProfile id = {userID} user={name}/>
       </div>
       {
         dateEvents.map(({id, datesEvent}) => (

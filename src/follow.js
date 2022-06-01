@@ -3,7 +3,7 @@ import { useState, useEffect} from 'react';
 import { auth, db } from './firebase.js';
 import { Button } from '@mui/material';
 
-function Follow({followUser}) {
+function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -24,6 +24,7 @@ function Follow({followUser}) {
 
         db.collection('users').doc(user.uid).collection('following').add({
             user: followUser,
+            username: name
         });
     }
 
