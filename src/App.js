@@ -142,31 +142,43 @@ function App() {
         </Box>
       </Modal>
       <div className='app_header'>
-        <Router>
-          <div className='top'>
-            <Navigation />
-            {user ? (
-              <div className='logOut'>
-                <Button onClick={() => auth.signOut()}>Log Out</Button>
-              </div>
-            ): (
-              <div className='app_loginContainer'>
-                <div className='signIn'>
-                  <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          {auth.currentUser ?  (
+            <div>
+              <Button onClick={() => auth.signOut()}>Log Out</Button>
+              <Router>
+                <Navigation />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/searchPage" element={<SearchPage />} />
+                </Routes>
+              </Router>
+            
+            </div>
+            
+          ) : (
+            <div className='log'>
+              <div className='top'>
+              {user ? (
+                <div className='logOut'>
+                  <Button onClick={() => auth.signOut()}>Log Out</Button>
                 </div>
-                <div className='signUp'>
-                  <Button onClick={() => setOpen(true)}>Sign Up</Button>
+              ): (
+                <div className='app_loginContainer'>
+                  <div className='signIn'>
+                    <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                  </div>
+                  <div className='signUp'>
+                    <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                  </div>
+                  
                 </div>
-                
-              </div>
-            )}
-          </div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/searchPage" element={<SearchPage />} />
-          </Routes>
-        </Router>
+              )}
+              <h3>You need to login to upload</h3>
+            </div>
+            </div>
+          )}
+          
         
       </div>
       
