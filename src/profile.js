@@ -1,9 +1,10 @@
 import Event from './event.js'
-import { db } from './firebase.js';
+import { db, auth } from './firebase';
 import React, { useState, useEffect} from 'react';
 import DatesEvents from './datesEvents.js';
 import './profile.css';
 import Modal from './modal.js'
+import './firebase.js'
 
 
 
@@ -33,11 +34,14 @@ function Profile ({username, passedDate}) {
 
 
     function getUserID () {
-        return "22zbt4skLZzQMnOzmqWA";
+        return auth.currentUser.uid;
+    }
+    function getUsername () {
+        return auth.currentUser.displayName;
     }
 
-    function loadIntoDateList (userID) {
-        db.collection('users').doc(userID).collection('dates').onSnapshot(snapshot => {
+    function loadIntoDateList (passedUserID) {
+        db.collection('users').doc(passedUserID).collection('dates').onSnapshot(snapshot => {
             updateDatesList(snapshot.docs.map(doc => ({
               id: doc.id,
               event: doc.data(),
@@ -94,9 +98,9 @@ function Profile ({username, passedDate}) {
 
             <div className = "headers">
                     
-
-                    <h1>{"Today's Date is " +  dateAsString(todaysDate)}</h1>
-                    <h2>{"Displaying Plans for"} </h2>
+                    <h1>{"Welcome, " + getUsername() + "!"}</h1>
+                    <h2>{"Today's Date is " +  dateAsString(todaysDate)}</h2>
+                    <h3>{"Displaying Plans for"} </h3>
                     <div className = "Select Display Date">
                         <select value={numberToMonth(displayDate.month)} name="input-month" id="input-month" onChange={updateDisplayMonthSelect} required>
                             <optgroup label="Months">
@@ -168,12 +172,12 @@ function Profile ({username, passedDate}) {
                         <button className='open-modal' onClick={() => setShow(true)}>
                             Add Event
                         </button>
-                        <Modal dl={datesList} title="New Event" onClose={() => setShow(false)} show={show}></Modal>
+                        <Modal dl={datesList} title="New Event" onClose={() => setShow(false)} show={show} date={displayDate}></Modal>
                     </div>
 
-                    <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))}></DatesEvents>
+                    <DatesEvents userID = {getUserID()} dateID = {getDateID(dateAsString(displayDate))} profileBool={true}></DatesEvents>
 
-                    {/*<button onClick={() => {loadIntoDateList(getUserID())}}></button>*/}
+                    {/*<button onClick={() => {console.log(getUserID())}}> </button>*/}
             </div>
 
             
