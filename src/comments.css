@@ -18,6 +18,9 @@
 
 .post_commentbox{
     display: flex;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
 }
 
 .post_input{
@@ -36,3 +39,4 @@
 .post_comments {
     padding: 10px 20px;
 }
+
