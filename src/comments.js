@@ -1,6 +1,6 @@
 import React from 'react';
 import './comments.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { db, auth } from './firebase';
 import firebase from "firebase/compat/app";
@@ -13,6 +13,7 @@ function Comments({userID, dateID, eventID}) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
   const [open, setOpen] = useState(false);
+  const dummy = useRef();
 
   const postComment = (event) => {
     event.preventDefault();
@@ -24,6 +25,7 @@ function Comments({userID, dateID, eventID}) {
     });
 
     setComment("");
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
     
   }
   useEffect(() => {
@@ -46,7 +48,8 @@ function Comments({userID, dateID, eventID}) {
       </IconButton>
       <Dialog aria-labelledby='dialog-title' open ={open} onClose = {() => setOpen(false)} PaperProps={{ sx: { width: "100%", height: "80%" } }} >
         <DialogTitle id = 'dialog-title'>Comments</DialogTitle>
-          <DialogContent>
+        <DialogContent>
+            <DialogContentText>
             <div className='post_comments'>
                 {comments.map(({id, comment})=> (
                 <p>
@@ -54,8 +57,9 @@ function Comments({userID, dateID, eventID}) {
                 </p>
                 ))}
             </div>
-
-
+            <span ref={dummy}></span>
+            </DialogContentText>
+        </DialogContent>
             <form className='post_commentbox'> 
                 <input 
                 className='post_input'
@@ -73,7 +77,6 @@ function Comments({userID, dateID, eventID}) {
                 <strong>Post</strong>
                 </button>
             </form>
-          </DialogContent>
       </Dialog>
     </div>
   )
