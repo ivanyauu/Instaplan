@@ -18,9 +18,14 @@ function FriendProfile({id, user}) {
       {user}
       </button>
       <Dialog aria-labelledby='dialog-title' open ={open} onClose = {() => setOpen(false)} PaperProps={{ sx: { width: "100%", height: "80%" } }} >
-        <DialogTitle id = 'dialog-title'>{user}</DialogTitle>
+        <DialogTitle id = 'dialog-title'>
+          <h1>
+          {user}
+          </h1>
+        <Follow followUser={id}/>
+        </DialogTitle>
           <DialogContent>
-                <Follow followUser={id}/>
+                
                 <UserEvents key={id} userID={id} name={user} />
           </DialogContent>
       </Dialog>
