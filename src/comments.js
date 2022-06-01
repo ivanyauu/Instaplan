@@ -47,7 +47,7 @@ function Comments({userID, dateID, eventID}) {
       <Dialog aria-labelledby='dialog-title' open ={open} onClose = {() => setOpen(false)} PaperProps={{ sx: { width: "100%", height: "80%" } }} >
         <DialogTitle id = 'dialog-title'>Comments</DialogTitle>
           <DialogContent>
-            <div>
+            <div className='post_comments'>
                 {comments.map(({id, comment})=> (
                 <p>
                     <strong>{comment.username}</strong> {comment.text} 

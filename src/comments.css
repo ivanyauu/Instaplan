@@ -17,6 +17,22 @@
 }
 
 .post_commentbox{
-    position: absolute;
-    top: 50%;
+    display: flex;
+}
+
+.post_input{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid lightgrey;
+}
+
+.post_button {
+    flex: 0;
+    border: none;
+    border-top: 1px solid lightgrey;
+}
+
+.post_comments {
+    padding: 10px 20px;
 }

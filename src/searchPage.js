@@ -39,7 +39,7 @@ function SearchPage() {
           </div>
     </div>
         {filteredUsers.map((account) => [
-          <Card key={account.id} className = "user">
+          <Card key={account.id} className = "user" style={{backgroundColor: "#f5f5f5"}}>
           <FriendProfile id = {account.id} user = {account.user}/>
           </Card>
         ])}

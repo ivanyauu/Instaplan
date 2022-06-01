@@ -7,7 +7,7 @@ import Comments from './comments';
 function Event({userID, dateID, eventID, name, date, time, description}) {
 
   return (
-    <Card className='event'>
+    <Card className='event' style={{backgroundColor: "#f5f5f5"}}>
       <div className='eventHeader'>
           <p><strong><i>{name}</i></strong> @ {time}</p>  
       </div>
