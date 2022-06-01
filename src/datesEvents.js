@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import './datesEvents.css'
 
 
-function DatesEvents({userID, dateID, date}) {
+function DatesEvents({userID, dateID, date, profileBool}) {
     const [events, setEvents] = useState([]);
     useEffect(() => {
         db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').onSnapshot(snapshot => {
@@ -14,8 +14,6 @@ function DatesEvents({userID, dateID, date}) {
             id: doc.id,
             event: doc.data()
           })));
-          //console.log("yay");
-          //console.log(events);
         })
       });
 
@@ -25,7 +23,7 @@ function DatesEvents({userID, dateID, date}) {
         <p>{date}</p>
         {
         events.map(({id, event}) => (
-          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={event.date} time={event.time} description={event.description}/>
+          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={event.date} startTime={event.startTime} endTime={event.endTime} description={event.description} profileBool={profileBool} publicEvent={event.publicEvent}/>
         ))
         }
     </div>
