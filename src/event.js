@@ -37,7 +37,6 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
   }, []);
 
   function displayPublic () {
-    console.log(profileBool + " " + publicEvent)
     if (profileBool && publicEvent) {
       return (<p>This event is public</p>)
     }
