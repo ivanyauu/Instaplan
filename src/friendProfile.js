@@ -5,6 +5,7 @@ import { db, auth } from './firebase.js';
 import { Modal, Button, Input, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import UserEvents from './userEvents.js';
 import Follow from './follow.js';
+import "./friendProfile.css"
 
 
 function FriendProfile({id, user}) {
@@ -12,15 +13,15 @@ function FriendProfile({id, user}) {
 
 
   return (
-    <div className='profButton'>
-      <Button onClick={()=>setOpen(true)}>
+    <div>
+      <button className='profButton' onClick={()=>setOpen(true)}>
       {user}
-      </Button>
+      </button>
       <Dialog aria-labelledby='dialog-title' open ={open} onClose = {() => setOpen(false)} PaperProps={{ sx: { width: "100%", height: "80%" } }} >
         <DialogTitle id = 'dialog-title'>{user}</DialogTitle>
           <DialogContent>
-                <UserEvents key={id} userID={id} name={user} />
                 <Follow followUser={id}/>
+                <UserEvents key={id} userID={id} name={user} />
           </DialogContent>
       </Dialog>
     </div>

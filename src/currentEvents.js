@@ -1,8 +1,10 @@
 import React from 'react';
-import './userEvents.css';
+import './currentEvents.css';
 import { db } from './firebase.js';
 import { useState, useEffect} from 'react';
 import DatesEvents from './datesEvents';
+import PublicEvents from './publicEvents';
+import FriendProfile from './friendProfile';
 
 
 function CurrentEvents({userID, name}) {
@@ -17,7 +19,7 @@ function CurrentEvents({userID, name}) {
     if (mm < 10) mm = mm;
 
     today = mm + '/' + dd + '/' + yyyy;
-    
+
     useEffect(() => {
         db.collection('users').doc(userID).collection('dates').where('date', '==', today).onSnapshot(snapshot => {
           setDateEvents(snapshot.docs.map(doc => ({
@@ -30,11 +32,11 @@ function CurrentEvents({userID, name}) {
   return (
     <div className='userEvents'>
       <div className='username'>
-        <p><strong><i>{name}</i></strong></p>
+        <FriendProfile id = {userID} user ={name}/>
       </div>
       {
         dateEvents.map(({id, datesEvent}) => (
-          <DatesEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />
+          <PublicEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />
         ))
       }
     </div>

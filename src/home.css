@@ -3,8 +3,9 @@
 }
 
 .home {
-    margin-left: 10px;
+    margin-left: 2%;
+    margin-right: 2%;
     margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
+    /* display: flex;
+    justify-content: space-around; */
 }

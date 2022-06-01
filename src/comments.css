@@ -16,3 +16,7 @@
     padding-bottom: 3%;
 }
 
+.post_commentbox{
+    position: absolute;
+    top: 50%;
+}
