@@ -23,7 +23,7 @@ function DatesEvents({userID, dateID, date, profileBool}) {
         <p>{date}</p>
         {
         events.map(({id, event}) => (
-          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={date} startTime={event.startTime} endTime={event.endTime} description={event.description} profileBool={profileBool} publicEvent={event.publicEvent}/>
+          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={event.date} startTime={event.startTime} endTime={event.endTime} description={event.description} profileBool={profileBool} publicEvent={event.publicEvent}/>
         ))
         }
     </div>
