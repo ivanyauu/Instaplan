@@ -243,7 +243,7 @@ function getDateID(passedDate) {
           ))}
       </div>
 
-  
+      {/*        
       <form className='post_commentbox'> 
           <input 
               className='post_input'
@@ -260,7 +260,7 @@ function getDateID(passedDate) {
           >
               <strong>Post</strong>
           </button>
-        </form>
+      </form>*/}
       
       {
       <div className="addEvent">      
