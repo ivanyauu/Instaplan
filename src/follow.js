@@ -6,6 +6,7 @@ import "./follow.css"
 
 function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -27,11 +28,18 @@ function Follow({followUser, name}) {
             user: followUser,
             username: name
         });
+        setClicked(true);
     }
 
     return (
-        <div>
-            <button className='followButton' onClick={follow}>Follow User</button>
+        <div className='followButton'>
+            {clicked ? (
+                <button className='following'>Following</button>
+            ): (
+                <button className='follow' onClick={follow}>Follow User</button>
+            )
+            }
+            
         </div>
     )
 }

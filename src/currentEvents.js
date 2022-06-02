@@ -28,14 +28,23 @@ function CurrentEvents({userID, name}) {
         })
       });
 
+      // for (const i = 0; i < dateEvents.length; i++) {
+      //   if (!dateEvents[i].publicEvent) {
+      //     //dateEvents.splice(i, 1);
+      //   }
+      // }
+
   return (
     <div className='userEvents'>
-      <div className='username'>
+      {/* <div className='username'>
         <FriendProfile id = {userID} user={name}/>
-      </div>
+      </div> */}
       {
         dateEvents.map(({id, datesEvent}) => (
-          <PublicEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />
+          <>
+            <FriendProfile id = {userID} user={name}/>
+            <PublicEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />
+          </>
         ))
       }
     </div>
