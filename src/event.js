@@ -103,6 +103,7 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
       updateButtonText("Event Already Added");
       findOrCreateDate(date);//this calls addToFirebase
     }
+    updateButtonText("Event Already Added");
   }
   
 
@@ -260,12 +261,6 @@ function getDateID(passedDate) {
               <strong>Post</strong>
           </button>
         </form>
-
-      
-
-        
-
-      <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
       
       {
       <div className="addEvent">      

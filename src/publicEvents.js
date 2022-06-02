@@ -25,7 +25,7 @@ function PublicEvents({userID, dateID, date}) {
         <p>{date}</p>
         {
         events.map(({id, event}) => (
-          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={event.date} time={event.time} startTime={event.startTime} endTime={event.endTime} description={event.description}/>
+          <Event key={id} userID={userID} dateID={dateID} eventID={id} name={event.name} date={date} time={event.time} startTime={event.startTime} endTime={event.endTime} description={event.description}/>
         ))
         }
     </div>
