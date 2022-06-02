@@ -14,13 +14,14 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
   const [comment, setComment] = useState('');
   const [datesList, updateDatesList]=useState([]);
   const [sharedEvents, updateSharedEvents]=useState([]);
+  const [buttonText, updateButtonText]=useState("Add Event To My Plans");
 
 
   useEffect(() => {
     const interval = setInterval(() => {
         loadIntoDateList(auth.currentUser.uid);
         loadIntoSharedEvents(auth.currentUser.uid);
-    }, 100);
+    }, 1000);
   })
 
   function loadIntoDateList (passedUserID) {
@@ -88,7 +89,7 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
     if (!profileBool) {
       return (
         <button className="deleteEvent" onClick={() => addEvent()}>
-          {textInAddEventButton()}
+          {buttonText}
         </button> 
       )
 
@@ -97,6 +98,7 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
 
   async function addEvent() {
     if (!isSharedEvent()) {//don't do anythign if the event is already shared shared event
+      updateButtonText("Event Already Added");
       findOrCreateDate(date);//this calls addToFirebase
     }
   }
@@ -141,13 +143,14 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
     });
   }
 
+  /*code to chance button appearence
   function textInAddEventButton() {
     if (isSharedEvent()) {
       return "Event Already Added!";
     } else {
       return "Add Event To My Plans";
     }
-  }
+  }*/
 
   
 function getDateID(passedDate) {
