@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './modal.css';
 import { db } from './firebase.js';
-import { auth } from './firebase';
+import { auth, addDoc } from './firebase';
 import { display } from "@mui/system";
 
 const Modal = props => {
@@ -175,16 +175,16 @@ useEffect(() => {
 
     async function addEvent(dateID){
 
-      db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
+      const test = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').add({
         name: eventName,
         description: eventDescription,
         startTime: startHour + ":" + startMinute + startAMPM,
         endTime: endHour + ":" + endMinute + endAMPM,
-        publicEvent: makePublic
-      });/*.then((docRef) => { //code to have each event store it's ID
-        db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(docRef.id).update({myID: docRef.id});
+        publicEvent: makePublic,
+        //docRef: test.id
+      }).then((docRef) => {
         console.log('Added document with ID: ', docRef.id);
-      })*/
+      });
     }
       
     function resetVariables(){
