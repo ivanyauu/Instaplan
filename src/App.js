@@ -143,7 +143,6 @@ function App() {
           </form>
         </Box>
       </Modal>
-      <div className='app_header'>
           {auth.currentUser ?  (
             <div>
               <Router>
@@ -154,17 +153,16 @@ function App() {
                   <Route path="/searchPage" element={<SearchPage />} />
                 </Routes>
               </Router>
+              <div className='logOut'>
+                <Button onClick={() => auth.signOut()}>Log Out</Button>
+              </div>
             
             </div>
             
             ) : (
               <div className='log'>
                 <div className='top'>
-                {user ? (
-                  <div className='logOut'>
-                    <Button onClick={() => auth.signOut()}>Log Out</Button>
-                  </div>
-                ): (
+                
                   <div className='app_loginContainer'>
                     <div className='signIn'>
                       <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
@@ -172,22 +170,20 @@ function App() {
                     <div className='signUp'>
                       <Button onClick={() => setOpen(true)}>Sign Up</Button>
                     </div>
-                    
                   </div>
-                )}
-                
+                  <div className='landing'>
+                      <LandingPage/>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
-          <div className='landing'>
-            <LandingPage/>
-          </div>
+            )}
+          
           
         
       </div>
       
 
-    </div>
+    // </div>
   )
 }
 
