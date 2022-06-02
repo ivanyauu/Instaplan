@@ -1,9 +1,6 @@
 import React from 'react';
 import './home.css'
-import { db, auth } from './firebase.js';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import UserEvents from './userEvents.js';
+import { auth } from './firebase.js';
 import HomeEvents from './homeEvents.js';
 
 
@@ -18,14 +15,14 @@ function Home({userID}) {
   if (mm < 10) mm = mm;
 
   today = mm + '/' + dd + '/' + yyyy;
-
+  
   return (
     <div className='home'>
       <div className='header'>
         <h1 className='header1'>Welcome {auth.currentUser.displayName},</h1>
         <h2>Here are the events for {today}:</h2>
       </div>
-      <HomeEvents userID={userID}/>
+      <HomeEvents userID={auth.currentUser.uid}/>
     </div>
   )
 }

@@ -144,7 +144,6 @@ function App() {
       <div className='app_header'>
           {auth.currentUser ?  (
             <div>
-              <Button onClick={() => auth.signOut()}>Log Out</Button>
               <Router>
                 <Navigation />
                 <Routes>

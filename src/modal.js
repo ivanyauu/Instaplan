@@ -4,11 +4,6 @@ import { db } from './firebase.js';
 import { auth, addDoc } from './firebase';
 import { display } from "@mui/system";
 
-
-
-
-
-
 const Modal = props => {
   const userID= auth.currentUser.uid;
   const [datesList, updateDatesList] = useState([]);
