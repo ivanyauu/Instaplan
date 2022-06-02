@@ -9,6 +9,7 @@ import { auth, db } from './firebase.js';
 import { useState, useEffect} from 'react';
 import { Input, Button, Modal, Box } from '@mui/material';
 import SearchPage from './searchPage.js'
+import LandingPage from './landingPage.js';
 
 
 const style = {
@@ -174,7 +175,7 @@ function App() {
                   
                 </div>
               )}
-              <h3>You need to login to upload</h3>
+              <LandingPage/>
             </div>
             </div>
           )}
