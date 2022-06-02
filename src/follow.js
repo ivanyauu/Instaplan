@@ -2,8 +2,9 @@ import React from 'react'
 import { useState, useEffect} from 'react';
 import { auth, db } from './firebase.js';
 import { Button } from '@mui/material';
+import "./follow.css"
 
-function Follow({followUser}) {
+function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -24,12 +25,13 @@ function Follow({followUser}) {
 
         db.collection('users').doc(user.uid).collection('following').add({
             user: followUser,
+            username: name
         });
     }
 
     return (
         <div>
-            <Button onClick={follow}>Follow User</Button>
+            <button className='followButton' onClick={follow}>Follow User</button>
         </div>
     )
 }

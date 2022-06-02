@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import "./searchPage.css"
 import { db } from './firebase.js';
 import { Card } from '@mui/material';
-import UserEvents from './userEvents.js';
 import FriendProfile from './friendProfile';
 
 function SearchPage() {
