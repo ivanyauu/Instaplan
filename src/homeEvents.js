@@ -20,7 +20,6 @@ function HomeEvents({userID}) {
   
     return (
       <div className='homeEvents'>
-        
         {
             following.map(({id, user}) => (
                 <div className='followingEvents'>

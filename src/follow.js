@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 
 function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -26,11 +27,18 @@ function Follow({followUser, name}) {
             user: followUser,
             username: name
         });
+        setClicked(true);
     }
 
     return (
         <div>
-            <Button onClick={follow}>Follow User</Button>
+            {clicked ? (
+                <Button>Following</Button>
+            ): (
+                <Button onClick={follow}>Follow User</Button>
+            )
+            }
+            
         </div>
     )
 }
