@@ -33,3 +33,8 @@ body {
     color: white;
 }
 
+.landing {
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+}

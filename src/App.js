@@ -157,28 +157,31 @@ function App() {
             
             </div>
             
-          ) : (
-            <div className='log'>
-              <div className='top'>
-              {user ? (
-                <div className='logOut'>
-                  <Button onClick={() => auth.signOut()}>Log Out</Button>
-                </div>
-              ): (
-                <div className='app_loginContainer'>
-                  <div className='signIn'>
-                    <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            ) : (
+              <div className='log'>
+                <div className='top'>
+                {user ? (
+                  <div className='logOut'>
+                    <Button onClick={() => auth.signOut()}>Log Out</Button>
                   </div>
-                  <div className='signUp'>
-                    <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                ): (
+                  <div className='app_loginContainer'>
+                    <div className='signIn'>
+                      <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                    </div>
+                    <div className='signUp'>
+                      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                    </div>
+                    
                   </div>
-                  
-                </div>
-              )}
-              <LandingPage/>
-            </div>
+                )}
+                
+              </div>
             </div>
           )}
+          <div className='landing'>
+            <LandingPage/>
+          </div>
           
         
       </div>
