@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect} from 'react';
 import { auth, db } from './firebase.js';
 import { Button } from '@mui/material';
+import "./follow.css"
 
 function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
@@ -30,7 +31,7 @@ function Follow({followUser, name}) {
 
     return (
         <div>
-            <Button onClick={follow}>Follow User</Button>
+            <button className='followButton' onClick={follow}>Follow User</button>
         </div>
     )
 }

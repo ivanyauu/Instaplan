@@ -21,9 +21,9 @@ function FriendProfile({id, user}) {
           <h1>
           {user}
           </h1>
+          <Follow followUser={id} name={user}/>
         </DialogTitle>
           <DialogContent>
-                <Follow followUser={id} name={user}/>
                 <SearchProfileEvents key={id} userID={id} name={user} />
           </DialogContent>
       </Dialog>

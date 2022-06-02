@@ -93,16 +93,16 @@ function Profile ({username, passedDate}) {
 
     
     return(
-        <>
+        <div className='profile'>
             
 
             <div className = "headers">
                     
-                    <h1>{"Welcome, " + getUsername() + "!"}</h1>
-                    <h2>{"Today's Date is " +  dateAsString(todaysDate)}</h2>
-                    <h3>{"Displaying Plans for"} </h3>
+                    <h1>{"Welcome " + getUsername() + ","}</h1>
+                    <h2>{"Today is " +  dateAsString(todaysDate)}</h2>
+                    <h3 className='displayHeader'>{"Displaying your plans for:"} </h3>
                     <div className = "Select Display Date">
-                        <select value={numberToMonth(displayDate.month)} name="input-month" id="input-month" onChange={updateDisplayMonthSelect} required>
+                        <select className="dropDowns" value={numberToMonth(displayDate.month)} name="input-month" id="input-month" onChange={updateDisplayMonthSelect} required>
                             <optgroup label="Months">
                                 <option month="1">January</option>
                                 <option month="2">February</option>
@@ -119,7 +119,7 @@ function Profile ({username, passedDate}) {
                             </optgroup> 
                         </select>
 
-                        <select value={displayDate.day} name="input-day" id="input-day" onChange={updateDisplayDaySelect} required>
+                        <select className="dropDowns" value={displayDate.day} name="input-day" id="input-day" onChange={updateDisplayDaySelect} required>
                             <optgroup label="Day">
                                 <option day="1">1</option>
                                 <option day="2">2</option>
@@ -155,7 +155,7 @@ function Profile ({username, passedDate}) {
                             </optgroup> 
                         </select>
 
-                        <select value={displayDate.year} name="input-year" id="input-year" onChange={updateDisplayYearSelect} required>
+                        <select className="dropDowns" value={displayDate.year} name="input-year" id="input-year" onChange={updateDisplayYearSelect} required>
                             <optgroup label="Year">
                                 <option year="2022">2022</option>
                                 <option year="2023">2023</option>
@@ -169,6 +169,7 @@ function Profile ({username, passedDate}) {
 
 
                     <div className='event-maker'>
+                        <h3>Add an event:</h3>
                         <button className='open-modal' onClick={() => setShow(true)}>
                             Add Event
                         </button>
@@ -181,7 +182,7 @@ function Profile ({username, passedDate}) {
             </div>
 
             
-        </>
+        </div>
     )
 }
 

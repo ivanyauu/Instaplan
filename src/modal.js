@@ -226,7 +226,7 @@ useEffect(() => {
         <div className="modal-body">
           <form id="input-form" onSubmit={submitEvent}>
             <span className="get-date">
-              <select value={eventMonth} name="input-month" id="input-month" onChange={updateEventMonth} required>
+              <select value={eventMonth} className="input-dates" name="input-month" id="input-month" onChange={updateEventMonth} required>
                     <optgroup label="Months">
                         <option month="1">January</option>
                         <option month="2">February</option>
@@ -242,7 +242,7 @@ useEffect(() => {
                         <option month="12">December</option>
                     </optgroup> 
                 </select>
-                <select value={eventDay} name="input-day" id="input-day" onChange={updateEventDay} required>
+                <select value={eventDay} className="input-dates" name="input-day" id="input-day" onChange={updateEventDay} required>
                     <optgroup label="Day">
                         <option day="1">1</option>
                         <option day="2">2</option>
@@ -277,7 +277,7 @@ useEffect(() => {
                         <option day="31">31</option>
                     </optgroup> 
                 </select>
-                <select value={eventYear} name="input-year" id="input-year" onChange={updateEventYear} required>
+                <select value={eventYear} className="input-dates" name="input-year" id="input-year" onChange={updateEventYear} required>
                     <optgroup label="Year">
                         <option year="2022">2022</option>
                         <option year="2023">2023</option>
@@ -293,30 +293,30 @@ useEffect(() => {
             <br></br>
             <input type="text" className="get-description" id='event-description' placeholder='Description' size="50" onChange={updateEventDescription} required/>
             <br></br>
-            <label>start:
+            <label className="start">Start:
               <input value={startHour} type="text" pattern="\d*" className="get-start-time" name="start-time-hour" placeholder='00' maxLength="2" size="2" onChange={startHourCheck} required/>
-              <input value={startMinute} type="text" pattern="\d*" name="start-time-minute" placeholder='00' maxLength="2" size="2" onChange={startMinuteCheck}required/>
-              <select onChange={updateStartAMPM}>
+              <input value={startMinute} type="text" pattern="\d*" name="start-time-minute" className="get-start-time" placeholder='00' maxLength="2" size="2" onChange={startMinuteCheck}required/>
+              <select onChange={updateStartAMPM} className="get-start-time">
                 <option ampm-start="am">AM</option>
                 <option ampm-start="pm">PM</option>
               </select>
             </label>
             <br></br>
-            <label>end:
+            <label className="start">End:
             <span className="end-style" >
-              <input value={endHour} type="text" pattern="\d*" name="end-time-hour" placeholder='00' maxLength="2" size="2" onChange={endHourCheck} required/>
+              <input value={endHour} className="get-start-time" type="text" pattern="\d*" name="end-time-hour" placeholder='00' maxLength="2" size="2" onChange={endHourCheck} required/>
                   
-              <input value={endMinute} type="text" pattern="\d*" name="end-time-minute" placeholder='00' maxLength="2" size="2" onChange={endMinuteCheck} required/>
+              <input value={endMinute} className="get-start-time" type="text" pattern="\d*" name="end-time-minute" placeholder='00' maxLength="2" size="2" onChange={endMinuteCheck} required/>
             
-              <select onChange={updateEndAMPM}>
+              <select onChange={updateEndAMPM} className="get-start-time" >
                 <option ampm-end="am">AM</option>
                 <option ampm-end="pm">PM</option>
               </select>
             </span>
             </label>
             <br></br>
-            <label>make public
-            <input type="checkbox" name="public-or-private" onChange={updatePublic}/>
+            <label className="public">Make Public
+            <input className="checkBox"type="checkbox" name="public-or-private" onChange={updatePublic}/>
             </label>
           <div className="modal-footer">
             <button className="close-button" onClick={ () => {

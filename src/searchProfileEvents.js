@@ -21,9 +21,6 @@ function SearchProfileEvents({userID, name}) {
 
   return (
     <div className='userEvents'>
-      <div className='username'>
-        <FriendProfile id = {userID} user ={name}/>
-      </div>
       {
         dateEvents.map(({id, datesEvent}) => (
           <PublicEvents key={id} userID={userID} dateID={id} date={datesEvent.date} />
