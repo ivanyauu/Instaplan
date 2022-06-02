@@ -19,7 +19,7 @@ function Home({userID}) {
   return (
     <div className='home'>
       <div className='header'>
-        <h1 className='header1'>Welcome,</h1>
+        <h1 className='header1'>Welcome {auth.currentUser.displayName},</h1>
         <h2>Here are the events for {today}:</h2>
       </div>
       <HomeEvents userID={auth.currentUser.uid}/>

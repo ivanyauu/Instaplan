@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import './homeEvents.css'
 import CurrentEvents from './currentEvents.js';
+import FriendProfile from './friendProfile.js';
 
 function HomeEvents({userID}) {   
     const [following, setFollowing] = useState([]);
@@ -17,7 +18,7 @@ function HomeEvents({userID}) {
         })
     });
     
-  
+
     return (
       <div className='homeEvents'>
         {

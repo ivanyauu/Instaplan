@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import UserEvents from './userEvents.js';
 import Follow from './follow.js';
 import "./friendProfile.css"
+import SearchProfileEvents from './searchProfileEvents';
 
 
 function FriendProfile({id, user}) {
@@ -20,10 +21,10 @@ function FriendProfile({id, user}) {
           <h1>
           {user}
           </h1>
+          <Follow followUser={id} name={user}/>
         </DialogTitle>
           <DialogContent>
-                <Follow followUser={id} name={user}/>
-                <UserEvents key={id} userID={id} name={user} />
+                <SearchProfileEvents key={id} userID={id} name={user} />
           </DialogContent>
       </Dialog>
     </div>

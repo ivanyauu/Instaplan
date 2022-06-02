@@ -24,11 +24,43 @@
   }
 
   .open-modal{
-    background-color: rgb(177, 5, 5);
-    color: #FFFFFF;
+    border: none;
+    background-color: white;
+    color: black;
+    border-bottom: 1px solid lightgrey;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    margin-top: 1%;
+    border-radius: 3px;
   }
 
   .open-modal:hover{
-    background-color: rgb(147, 4, 4);
-    cursor: pointer;
+    cursor:pointer;
+    background-color: #333;
+    color: white;
+    border-bottom: 1px solid white;
+    cursor:pointer;
+    border-radius: 3px;
+  }
+
+  .profile{
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+  }
+
+  .displayHeader{
+    margin-top: 2%;
+  }
+
+  .dropDowns{
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    margin-right: 1%;
+    font-size: 14px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 3px;
   }
