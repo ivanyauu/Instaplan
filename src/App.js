@@ -9,6 +9,7 @@ import { auth, db } from './firebase.js';
 import { useState, useEffect} from 'react';
 import { Input, Button, Modal, Box } from '@mui/material';
 import SearchPage from './searchPage.js'
+import LandingPage from './landingPage.js';
 
 
 const style = {
@@ -90,6 +91,7 @@ function App() {
 
   return (
     <div className="app">
+      
       <Modal
         open={open}
         onClose={handleClose}
@@ -142,31 +144,45 @@ function App() {
         </Box>
       </Modal>
       <div className='app_header'>
-        <Router>
-          <div className='top'>
-            <Navigation />
-            {user ? (
-              <div className='logOut'>
-                <Button onClick={() => auth.signOut()}>Log Out</Button>
-              </div>
-            ): (
-              <div className='app_loginContainer'>
-                <div className='signIn'>
-                  <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-                </div>
-                <div className='signUp'>
-                  <Button onClick={() => setOpen(true)}>Sign Up</Button>
-                </div>
+          {auth.currentUser ?  (
+            <div>
+              <Router>
+                <Navigation />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/searchPage" element={<SearchPage />} />
+                </Routes>
+              </Router>
+            
+            </div>
+            
+            ) : (
+              <div className='log'>
+                <div className='top'>
+                {user ? (
+                  <div className='logOut'>
+                    <Button onClick={() => auth.signOut()}>Log Out</Button>
+                  </div>
+                ): (
+                  <div className='app_loginContainer'>
+                    <div className='signIn'>
+                      <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                    </div>
+                    <div className='signUp'>
+                      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                    </div>
+                    
+                  </div>
+                )}
                 
               </div>
-            )}
+            </div>
+          )}
+          <div className='landing'>
+            <LandingPage/>
           </div>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/searchPage" element={<SearchPage />} />
-          </Routes>
-        </Router>
+          
         
       </div>
       

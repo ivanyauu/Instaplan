@@ -1,34 +1,32 @@
 import React from 'react'
 import { db } from './firebase.js'
-import UserEvents from './userEvents.js';
-import FriendProfile from './friendProfile.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './homeEvents.css'
 import CurrentEvents from './currentEvents.js';
+import FriendProfile from './friendProfile.js';
 
-function HomeEvents({userID}) {
-    const [userEventss, setUserEventss] = useState([]);
-    const [followers, setFollowers] = useState([]);
+function HomeEvents({userID}) {   
+    const [following, setFollowing] = useState([]);
+
     useEffect(() => {
-      db.collection('users').onSnapshot(snapshot => {
-        setUserEventss(snapshot.docs.map(doc => ({
-          id: doc.id,
-          userEvent: doc.data()
-        })));
-      })
-    }, []);
+        db.collection('users').doc(userID).collection('following').onSnapshot(snapshot => {
+            setFollowing(snapshot.docs.map(doc => ({
+                id: doc.id,
+                user: doc.data()
+            })));
+        })
+    });
     
-    
-  
+
     return (
       <div className='homeEvents'>
         {
-          userEventss.map(({id, userEvent}) => (
-            <div className='userEvents'>
-                <CurrentEvents id={id} key={id} userID={id} name={userEvent.user} />
-            </div>
-          ))
+            following.map(({id, user}) => (
+                <div className='followingEvents'>
+                    <CurrentEvents id={id} key={id} userID={user.user} name={user.username} />
+                </div>
+            ))
         }
       </div>
     )

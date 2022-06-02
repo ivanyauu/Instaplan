@@ -2,9 +2,11 @@ import React from 'react'
 import { useState, useEffect} from 'react';
 import { auth, db } from './firebase.js';
 import { Button } from '@mui/material';
+import "./follow.css"
 
-function Follow({followUser}) {
+function Follow({followUser, name}) {
     const [user, setUser] = useState(null);
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -24,12 +26,20 @@ function Follow({followUser}) {
 
         db.collection('users').doc(user.uid).collection('following').add({
             user: followUser,
+            username: name
         });
+        setClicked(true);
     }
 
     return (
-        <div>
-            <Button onClick={follow}>Follow User</Button>
+        <div className='followButton'>
+            {clicked ? (
+                <button className='following'>Following</button>
+            ): (
+                <button className='follow' onClick={follow}>Follow User</button>
+            )
+            }
+            
         </div>
     )
 }

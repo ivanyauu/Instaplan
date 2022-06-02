@@ -25,6 +25,14 @@
     text-decoration: none;
 }
 
+.logOut {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
 .navhome:hover{
     background-color: #111;
 }
@@ -35,12 +43,21 @@
     background-color: #111;
 }
 
+.logOut:hover{
+    background-color: #111;
+    cursor: pointer;
+}
+
 .navhome{
-    float:left
+ float:left
 }
 .navprofile{
   float:left
 }
 .searchPage{
   float:left
+}
+
+.logOut{
+    float:right
 }

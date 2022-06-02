@@ -15,6 +15,8 @@ function Event({userID, dateID, eventID, name, startTime, endTime, description, 
   const [datesList, updateDatesList]=useState([]);
   const [sharedEvents, updateSharedEvents]=useState([]);
   const [buttonText, updateButtonText]=useState("Add Event To My Plans");
+  const [likes,setLikes] = useState(0);
+  const [liked,setLiked] = useState(false);
 
 
   useEffect(() => {
@@ -165,8 +167,50 @@ function getDateID(passedDate) {
 
 
 
+  const like = (event) => {
+    event.preventDefault()
+    
+    const increment = firebase.firestore.FieldValue.increment(1);
+    
   
-
+    const likesRef = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').doc(`${Math.random()}`);
+    const statsRef = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').doc(`--stats--`);
+  
+  
+    db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      username: auth.currentUser.displayName,
+  });
+  
+    const batch = db.batch();
+    batch.set(likesRef, { title: 'Like!' })
+    batch.set(statsRef, { likeCount: increment }, { merge: true});
+    batch.commit();
+    setLikes(1);
+    setLiked(true);
+      
+  };
+  
+  const dislike = (event) => {
+    event.preventDefault()
+    
+    const decrement = firebase.firestore.FieldValue.increment(-1);
+    const likesRef = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').doc(`${Math.random()}`);
+    const statsRef = db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').doc(`--stats--`);
+  
+    db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).collection('likes').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      username: auth.currentUser.displayName,
+  });
+  
+    const batch = db.batch();
+    batch.set(likesRef, { title: 'Dislike!' })
+    batch.set(statsRef, { likeCount: decrement }, { merge: true });
+    batch.commit();
+    setLikes(0);
+    setLiked(false);
+      
+  };
   return (
     <Card className='event' style={{backgroundColor: "#f5f5f5"}}>
 
@@ -228,6 +272,10 @@ function getDateID(passedDate) {
         {addEventButton()}
       </div>
       }
+      <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
+      <button class="like" onClick = {liked ? dislike : like}>
+        like {likes}
+      </button>
 
     </Card>
   )
