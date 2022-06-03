@@ -95,14 +95,16 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
         {displayPublic()}
       </div>
 
-      <div>
-         {deleteEventButton()}
-       </div>
+      <div className='eventButtons'>
+          <div>
+            {deleteEventButton()}
+          </div>
+          <button className="like" onClick = {liked ? dislike : like}>
+              Like {likes}
+          </button>
+          <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
+      </div>
 
-      <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
-      <button class="like" onClick = {liked ? dislike : like}>
-        like {likes}
-      </button>
 
       
 
