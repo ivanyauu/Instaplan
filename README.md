@@ -5,6 +5,7 @@ Clone repository into your local react project and install the following package
 - npm install firebase
 - npm install @mui/material @emotion/react @emotion/styled
 - npm install @material-ui/core @material-ui/icons
+- npm install react-router-dom
 
 ### Using the app
 - Sign up with a username, email, and password
