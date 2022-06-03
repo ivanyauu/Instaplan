@@ -62,6 +62,25 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
     setLiked(false);
       
   };
+
+
+  function deleteEventButton () {
+    if (profileBool) {
+      return (
+        <button className="deleteEvent" onClick={deleteEvent}>
+          Delete This Event
+        </button> 
+      )
+    }
+  }
+
+  function deleteEvent () {
+
+    console.log(eventID)
+    db.collection('users').doc(userID).collection('dates').doc(dateID).collection('myEvents').doc(eventID).delete();
+
+  }
+
   return (
     <Card className='event' style={{backgroundColor: "#f5f5f5"}}>
       <div className='eventHeader'>
@@ -76,10 +95,16 @@ function Event({userID, dateID, eventID, name, date, startTime, endTime, descrip
         {displayPublic()}
       </div>
 
+      <div>
+         {deleteEventButton()}
+       </div>
+
       <Comments userID={userID} dateID={dateID} eventID={eventID}></Comments> 
       <button class="like" onClick = {liked ? dislike : like}>
         like {likes}
       </button>
+
+      
 
     </Card>
   )

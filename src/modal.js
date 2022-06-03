@@ -181,9 +181,6 @@ useEffect(() => {
         startTime: startHour + ":" + startMinute + startAMPM,
         endTime: endHour + ":" + endMinute + endAMPM,
         publicEvent: makePublic,
-        //docRef: test.id
-      }).then((docRef) => {
-        console.log('Added document with ID: ', docRef.id);
       });
     }
       
